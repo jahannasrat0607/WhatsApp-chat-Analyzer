@@ -24,7 +24,7 @@ if uploaded_file is not None:
         # Fetch statistics
         num_messages, words, num_media_messages, num_links = helper.fetch_stats(selected_user, df)
 
-        # Top Statistics with smaller titles
+        # Top Statistics
         st.markdown("<h2 style='font-size:24px; color: #4CAF50;'>📊 Top Statistics</h2>", unsafe_allow_html=True)
         col1, col2, col3, col4 = st.columns(4)
         with col1:
@@ -43,7 +43,7 @@ if uploaded_file is not None:
             st.markdown("<h4 style='font-size:18px;'>Links Shared</h4>", unsafe_allow_html=True)
             st.markdown(f"<p style='font-size:20px;'>{num_links}</p>", unsafe_allow_html=True)
 
-        # Monthly Timeline with smaller title
+        # Monthly Timeline
         col1, col2 = st.columns(2)
         with col1:
             st.markdown("<h2 style='font-size:22px; color: #FFA500;'>📅 Monthly Timeline</h2>", unsafe_allow_html=True)
@@ -53,7 +53,7 @@ if uploaded_file is not None:
             ax.plot(timeline['time'], timeline['message'], color='green')
             st.pyplot(fig)
 
-        # Daily Timeline with smaller title
+        # Daily Timeline
         with col2:
             st.markdown("<h2 style='font-size:22px; color: #FFA500;'>📅 Daily Timeline</h2>", unsafe_allow_html=True)
             timeline = helper.daily_timeline(selected_user, df)
@@ -62,7 +62,7 @@ if uploaded_file is not None:
             ax.plot(timeline['date_only'], timeline['message'], color='violet')
             st.pyplot(fig)
 
-        # Weekly Activity Map with smaller title
+        # Weekly Activity Map
         st.markdown("<h2 style='font-size:24px; color: #FF4500;'>📅 Activity Map</h2>", unsafe_allow_html=True)
         col1, col2 = st.columns(2)
         with col1:
@@ -80,14 +80,14 @@ if uploaded_file is not None:
             ax.bar(busy_month.index, busy_month.values, color='orange')
             st.pyplot(fig)
 
-        # Heatmap with smaller title
+        # Heatmap
         st.markdown("<h2 style='font-size:24px; color: #FF6347;'>🗓️ Weekly Activity Heatmap</h2>", unsafe_allow_html=True)
         hm = helper.activity_heatmap(selected_user, df)
         fig, ax = plt.subplots(figsize=(10,4))
         ax = sns.heatmap(hm)
         st.pyplot(fig)
 
-        # Most Busy Users with smaller title
+        # Most Busy Users
         if selected_user == 'Overall':
             st.markdown("<h2 style='font-size:24px; color: #4CAF50;'>🔝 Most Busy Users</h2>", unsafe_allow_html=True)
             x, new_df = helper.most_busy_users(df)
@@ -120,7 +120,7 @@ if uploaded_file is not None:
         ax.barh(common_words_df['word'], common_words_df['appeared'])
         st.pyplot(fig)
 
-        # Emoji Analysis with smaller title
+        # Emoji Analysis
         st.markdown("<h2 style='font-size:24px; color: #FF69B4;'>😀 Emoji Analysis</h2>", unsafe_allow_html=True)
         emoji_df = helper.emoji_counts(selected_user, df)
         col1, col2 = st.columns(2)
@@ -130,4 +130,3 @@ if uploaded_file is not None:
             fig, ax = plt.subplots()
             ax.bar(emoji_df[0].head(10), emoji_df[1].head(10))
             st.pyplot(fig)
-

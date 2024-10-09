@@ -4,30 +4,24 @@ import pandas as pd
 
 def preprocess(data):
     pattern = r"\d{2}/\d{2}/\d{4}, \d{1,2}:\d{2}\s?[apm]{2} - "
-
     # Splitting messages by the pattern
     messages = re.split(pattern, data)[1:]
-
     # Finding the corresponding dates
     dates = re.findall(pattern, data)
-
     # Creating a DataFrame
     df = pd.DataFrame({'user_message': messages, 'message_date': dates})
-
     # Cleaning the 'message_date' column
-    df['message_date'] = df['message_date'].str.replace('\u202f', ' ')  # Replace narrow no-break space
-    df['message_date'] = df['message_date'].str.replace(' - ', '')  # Remove ' - ' from the end
-
+    df['message_date'] = df['message_date'].str.replace('\u202f', ' ')
+    df['message_date'] = df['message_date'].str.replace(' - ', '')
     # Convert to datetime, handling am/pm
     df['message_date'] = pd.to_datetime(df['message_date'], format='%d/%m/%Y, %I:%M %p')
     df.rename(columns={'message_date': 'date'}, inplace=True)
-
     # Separate users and messages
     users = []
     messages = []
 
     for message in df['user_message']:
-        # Use regex to identify user and message, where user is either a phone number or a name
+        # Used regex to identify user and message, where user is either a phone number or a name
         entry = re.split(r'(^[^:]+):\s', message.strip())  # Split at the first colon
 
         if len(entry) > 2:  # Valid user and message pair
@@ -41,7 +35,6 @@ def preprocess(data):
             users.append('group_notification')  # For group notifications or system messages
             messages.append(entry[0].strip())  # Append the message content
 
-    # Add 'user' and 'message' columns to the DataFrame
     df['user'] = users
     df['message'] = messages
 
@@ -66,5 +59,4 @@ def preprocess(data):
         else:
             period.append(str(hour) + '-' + str(hour + 1))
     df['period'] = period
-    # print(period)
     return df

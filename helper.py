@@ -3,12 +3,9 @@ from collections import Counter
 import pandas as pd
 from wordcloud import WordCloud
 import emoji
-import seaborn as sns
 from urlextract import URLExtract
 
 extractor = URLExtract()
-# urls = extractor.find_urls()
-# print(urls)
 
 
 def fetch_stats(selected_user,df):
@@ -48,6 +45,7 @@ def create_wc(selected_user, df):
     new_df = new_df[new_df['message'] != '<Media omitted>']
     if selected_user != 'Overall':
         new_df = new_df[new_df['user'] == selected_user]
+
     def remove_stopwords(message):
         l = []
         for word in message.lower().split():
@@ -94,6 +92,7 @@ def emoji_counts(selected_user, df):
     emoji_df = pd.DataFrame(Counter(emojis).most_common(len(Counter(emojis))))
     return emoji_df
 
+
 def monthly_timeline(selected_user,df):
     if selected_user != 'Overall':
         df = df[df['user'] == selected_user]
@@ -123,6 +122,7 @@ def month_activity_map(selected_user, df):
     if selected_user != 'Overall':
         df = df[df['user'] == selected_user]
     return df['month'].value_counts()
+
 
 def activity_heatmap(selected_user, df):
     if selected_user != 'Overall':
