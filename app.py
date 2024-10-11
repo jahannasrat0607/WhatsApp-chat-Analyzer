@@ -2,10 +2,13 @@ import preprocessor, helper
 import streamlit as st
 import matplotlib.pyplot as plt
 import seaborn as sns
+# Layout configuration
+st.set_page_config(page_title="WhatsApp Chat Analyzer", layout="wide")
 
-st.sidebar.title('WhatsApp Chat Analyzer')
+# File uploader
 uploaded_file = st.sidebar.file_uploader("Choose a file")
 if uploaded_file is not None:
+    st.success("File uploaded successfully!")
     # To read file as bytes:
     bytes_data = uploaded_file.getvalue()
     #  to convert this file stream of byte to string
