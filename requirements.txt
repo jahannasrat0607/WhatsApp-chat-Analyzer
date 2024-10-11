@@ -4,6 +4,5 @@ pandas
 wordcloud
 urlextract
 emoji
-streamlit
 
 
