@@ -22,7 +22,7 @@ The app leverages various libraries such as Streamlit, Pandas, Matplotlib, and S
 - Click on "Show Analysis" to view the insights.
 
 ## Deployment
-The app is deployed on Streamlit and can be accessed at:[WhatsApp Chat Analyzer](https://testingcha-bntwfht8vsv9q6xf98xwgd.streamlit.app/)
+The app is deployed on Streamlit and can be accessed at: [WhatsApp Chat Analyzer](https://testingcha-bntwfht8vsv9q6xf98xwgd.streamlit.app/)
 
 ## Contributing
 Feel free to fork the repository and submit pull requests for any improvements or features you would like to add.
